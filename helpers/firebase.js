@@ -1,4 +1,5 @@
 const firebase = require('firebase')
+require('firebase/firestore')
 const config = {
   apiKey: `AIzaSyAhKXW-Y3uyCbqsWZsHsKAEMN-pNS6--Wk`,
   authDomain: `fir-one-1a9f1.firebaseapp.com`,
@@ -11,8 +12,10 @@ provider.setCustomParameters({
   'login_hint': 'user@example.com'
 })
 const auth = firebase.auth()
+const db = firebase.firestore()
 module.exports = {
   firebase,
   provider,
-  auth
+  auth,
+  db,
 }
