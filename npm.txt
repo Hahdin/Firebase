@@ -1,0 +1,6 @@
+npm i --save-dev webpack-dev-server
+npm i --save @babel/plugin-transform-regenerator @babel/polyfill babel-loader @babel/preset-env
+npm i --save @babel/cli @babel/core @babel/node @babel/plugin-proposal-class-properties  @babel/preset-react
+npm i --save @material-ui/core express install npm css-loader html-webpack-plugin path style-loader
+npm i --save react react-bootstrap react-dom webpack webpack-cli
+npm i --save react-router-bootstrap react-router-dom
