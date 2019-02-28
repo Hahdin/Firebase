@@ -1,21 +1,46 @@
 
 import React from 'react'
 import { Button } from "react-bootstrap"
-import { auth, provider } from '../helpers'
+import { auth, provider, db, firebase } from '../helpers'
 import { useState } from 'react'
 export const HomePage = ({ ...props }) => {
   const [user, loginUser] = useState({ profile: null })
-  user.profile = JSON.parse(localStorage.getItem('user'))
+  const [ready, loading] = useState(false)
   const logout = () => {
-    localStorage.setItem('user', null)
-    loginUser({ profile: null })
+    auth.signOut().then(() => {
+      loginUser({ profile: null })
+    }).catch((error) => {
+      console.log(error)
+    });
   }
-  const login = () => {
-    auth.signInWithPopup(provider).then((result) => {
-      localStorage.setItem('user', JSON.stringify(result.user))
-      loginUser({ profile: result.user })
+  auth.onAuthStateChanged((_user) => {
+    if (_user && !user.profile) {
+      loginUser({ profile: _user })
+    }
+    if (!ready) {
+      loading(true)
+    }
+  })
+  const storeUser = user => {
+    db.collection('users').doc(user.uid).set({
+      displayName: user.displayName,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      metadata: {
+        creationTime: user.metadata.creationTime,
+        lastSignInTime: user.metadata.lastSignInTime,
+      },
     })
   }
+  const login = () => {
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+      auth.signInWithPopup(provider).then((result) => {
+        storeUser(result.user)
+        loginUser({ profile: result.user })
+      })
+    }).catch(reason => console.log(reason))
+  }
+  if (!ready) return (<div>...</div>)
   if (user.profile) {
     return (
       <div style={{ color: 'black' }}>
