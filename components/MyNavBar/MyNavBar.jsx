@@ -7,7 +7,7 @@ import {
 import { LinkContainer } from "react-router-bootstrap";
 export const MyNavBar = ({ ...props }) => {
   return (
-    <Navbar inverse fluid collapseOnSelect style={{boxShadow: '2px 2px 10px black'}}>
+<Navbar inverse fluid collapseOnSelect style={{boxShadow: '2px 2px 10px black'}}>
       <Navbar.Header>
         <Navbar.Brand>
           <a href="/">Fire Base 1</a>
@@ -15,11 +15,11 @@ export const MyNavBar = ({ ...props }) => {
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
-        <Nav>
-        <LinkContainer to="/">
+        <Nav className="mr-auto">
+        <LinkContainer exact to="/">
             <NavItem eventKey={1} > Home Page </NavItem>
           </LinkContainer>
-          <LinkContainer to="/private">
+          <LinkContainer exact to="/private">
             <NavItem eventKey={2} > User only </NavItem>
           </LinkContainer>
         </Nav>
@@ -30,11 +30,10 @@ export const MyNavBar = ({ ...props }) => {
     </Navbar>
   )
 }
-//
 /**
- * pure: false option in the connect method is required to let the navbar know the react router has changed routes
- * Basically, the default (true) runs a componentShouldUpdate test, and unless something it is relying on in state
- * has changed, it won't update. Setting it to false will allow it to update and pick up the new route, and hightlight
- * the active link/tab
+ * Please note that by default React Router will match any location 
+ * that contains path specified in to prop. To make <LinkContainer> 
+ * to match the location exactly, set exact prop to true or use 
+ * <IndexLinkContainer> instead.
  */
 export default MyNavBar

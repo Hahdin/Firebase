@@ -12,14 +12,14 @@ const App_ = ({ ...props }) => {
         <Router history={history}>
           <div>
             <MyNavBar />
-            <Route path="/" exact component={HomePage} />
+            <Route exact path="/" component={HomePage} />
             <UserRoute path="/private" component={PrivatePage} />
           </div>
         </Router>
      </div>
   );
 }
-export const App = connect({
-  data: 'something',
-})(App_)
+export const App = connect((props, ref) => ({
+  test:'none'
+}))(App_)
 export default App
