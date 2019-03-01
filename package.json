@@ -4,12 +4,11 @@
   "description": "test firebase app",
   "private": true,
   "scripts": {
-    "heroku-postbuild": "webpack -p",
     "dev_local": "webpack && babel-node --presets @babel/preset-env server.js",
     "dev": "webpack-dev-server --open",
     "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build --presets @babel/preset-env server.js",
-    "build": "npm run clean && npm run build-babel",
+    "build-babel": "babel -d --presets @babel/preset-env server.js",
+    "build": "npm run build-babel",
     "start": "npm run build && node ./build/server.js"
   },
   "author": "",
