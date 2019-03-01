@@ -8,6 +8,7 @@
     "dev": "webpack-dev-server --open",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d --presets @babel/preset-env server.js",
+    "buildwp": "webpack",
     "build": "npm run build-babel",
     "start": "npm run build && node ./build/server.js"
   },

@@ -35,6 +35,8 @@ jspm_packages
 
 # Optional npm cache directory
 .npm
+# firebase cache
+/.firebase/*.cache
 
 # Optional REPL history
 .node_repl_history
