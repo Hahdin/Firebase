@@ -1,9 +1,8 @@
 
 import React from 'react'
-import {auth} from '../helpers'
 export const PrivatePage = ({ ...props }) => {
   let user = {
-    profile: auth.currentUser
+    profile: JSON.parse(localStorage.getItem('user'))
   }
   return (
     <div style={{ color: 'black' }}>

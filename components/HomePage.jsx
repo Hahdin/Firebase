@@ -14,10 +14,12 @@ export const HomePage = ({ ...props }) => {
     });
   }
   auth.onAuthStateChanged((_user) => {
+    _user ?  localStorage.setItem('user', JSON.stringify(_user)) : 
+    localStorage.removeItem('user')
     if (_user && !user.profile) {
       loginUser({ profile: _user })
     }
-    if (!ready) {
+    if (!ready){
       loading(true)
     }
   })
@@ -35,7 +37,7 @@ export const HomePage = ({ ...props }) => {
   const login = () => {
     auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
       auth.signInWithPopup(provider).then((result) => {
-        storeUser(result.user)
+        storeUser(result.user)//firebase db
         loginUser({ profile: result.user })
       })
     }).catch(reason => console.log(reason))
